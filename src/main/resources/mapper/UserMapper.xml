@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dove.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.dove.entity.User">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="userName" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="xtLrsj" jdbcType="TIMESTAMP" property="xtlrsj" />
-    <result column="xtLrrxm" jdbcType="VARCHAR" property="xtlrrxm" />
-    <result column="xtLrrid" jdbcType="VARCHAR" property="xtlrrid" />
-    <result column="xtLrrbm" jdbcType="VARCHAR" property="xtlrrbm" />
-    <result column="xtLrrbmid" jdbcType="VARCHAR" property="xtlrrbmid" />
-    <result column="xtLrip" jdbcType="VARCHAR" property="xtlrip" />
-    <result column="xtZhxgsj" jdbcType="TIMESTAMP" property="xtzhxgsj" />
-    <result column="xtZhxgrxm" jdbcType="VARCHAR" property="xtzhxgrxm" />
-    <result column="xtZhxgrid" jdbcType="VARCHAR" property="xtzhxgrid" />
-    <result column="xtZhxgrbm" jdbcType="VARCHAR" property="xtzhxgrbm" />
-    <result column="xtZhxgrbmid" jdbcType="VARCHAR" property="xtzhxgrbmid" />
-    <result column="xtZhxgip" jdbcType="VARCHAR" property="xtzhxgip" />
-    <result column="xtZxbz" jdbcType="BIT" property="xtzxbz" />
-    <result column="xtZxyy" jdbcType="VARCHAR" property="xtzxyy" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.dove.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="userName" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="xtLrsj" jdbcType="TIMESTAMP" property="xtlrsj"/>
+        <result column="xtLrrxm" jdbcType="VARCHAR" property="xtlrrxm"/>
+        <result column="xtLrrid" jdbcType="VARCHAR" property="xtlrrid"/>
+        <result column="xtLrrbm" jdbcType="VARCHAR" property="xtlrrbm"/>
+        <result column="xtLrrbmid" jdbcType="VARCHAR" property="xtlrrbmid"/>
+        <result column="xtLrip" jdbcType="VARCHAR" property="xtlrip"/>
+        <result column="xtZhxgsj" jdbcType="TIMESTAMP" property="xtzhxgsj"/>
+        <result column="xtZhxgrxm" jdbcType="VARCHAR" property="xtzhxgrxm"/>
+        <result column="xtZhxgrid" jdbcType="VARCHAR" property="xtzhxgrid"/>
+        <result column="xtZhxgrbm" jdbcType="VARCHAR" property="xtzhxgrbm"/>
+        <result column="xtZhxgrbmid" jdbcType="VARCHAR" property="xtzhxgrbmid"/>
+        <result column="xtZhxgip" jdbcType="VARCHAR" property="xtzhxgip"/>
+        <result column="xtZxbz" jdbcType="BIT" property="xtzxbz"/>
+        <result column="xtZxyy" jdbcType="VARCHAR" property="xtzxyy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, userName, password, xtLrsj, xtLrrxm, xtLrrid, xtLrrbm, xtLrrbmid, xtLrip, xtZhxgsj, 
     xtZhxgrxm, xtZhxgrid, xtZhxgrbm, xtZhxgrbmid, xtZhxgip, xtZxbz, xtZxyy
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from User
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <insert id="insert" parameterType="com.dove.entity.User">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from User
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="insert" parameterType="com.dove.entity.User">
     insert into User (id, userName, password, 
       xtLrsj, xtLrrxm, xtLrrid, 
       xtLrrbm, xtLrrbmid, xtLrip, 
@@ -44,170 +44,170 @@
       #{xtzhxgrbm,jdbcType=VARCHAR}, #{xtzhxgrbmid,jdbcType=VARCHAR}, #{xtzhxgip,jdbcType=VARCHAR}, 
       #{xtzxbz,jdbcType=BIT}, #{xtzxyy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.dove.entity.User">
-    insert into User
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="username != null">
-        userName,
-      </if>
-      <if test="password != null">
-        password,
-      </if>
-      <if test="xtlrsj != null">
-        xtLrsj,
-      </if>
-      <if test="xtlrrxm != null">
-        xtLrrxm,
-      </if>
-      <if test="xtlrrid != null">
-        xtLrrid,
-      </if>
-      <if test="xtlrrbm != null">
-        xtLrrbm,
-      </if>
-      <if test="xtlrrbmid != null">
-        xtLrrbmid,
-      </if>
-      <if test="xtlrip != null">
-        xtLrip,
-      </if>
-      <if test="xtzhxgsj != null">
-        xtZhxgsj,
-      </if>
-      <if test="xtzhxgrxm != null">
-        xtZhxgrxm,
-      </if>
-      <if test="xtzhxgrid != null">
-        xtZhxgrid,
-      </if>
-      <if test="xtzhxgrbm != null">
-        xtZhxgrbm,
-      </if>
-      <if test="xtzhxgrbmid != null">
-        xtZhxgrbmid,
-      </if>
-      <if test="xtzhxgip != null">
-        xtZhxgip,
-      </if>
-      <if test="xtzxbz != null">
-        xtZxbz,
-      </if>
-      <if test="xtzxyy != null">
-        xtZxyy,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrsj != null">
-        #{xtlrsj,jdbcType=TIMESTAMP},
-      </if>
-      <if test="xtlrrxm != null">
-        #{xtlrrxm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrrid != null">
-        #{xtlrrid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrrbm != null">
-        #{xtlrrbm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrrbmid != null">
-        #{xtlrrbmid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrip != null">
-        #{xtlrip,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgsj != null">
-        #{xtzhxgsj,jdbcType=TIMESTAMP},
-      </if>
-      <if test="xtzhxgrxm != null">
-        #{xtzhxgrxm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgrid != null">
-        #{xtzhxgrid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgrbm != null">
-        #{xtzhxgrbm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgrbmid != null">
-        #{xtzhxgrbmid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgip != null">
-        #{xtzhxgip,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzxbz != null">
-        #{xtzxbz,jdbcType=BIT},
-      </if>
-      <if test="xtzxyy != null">
-        #{xtzxyy,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dove.entity.User">
-    update User
-    <set>
-      <if test="username != null">
-        userName = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrsj != null">
-        xtLrsj = #{xtlrsj,jdbcType=TIMESTAMP},
-      </if>
-      <if test="xtlrrxm != null">
-        xtLrrxm = #{xtlrrxm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrrid != null">
-        xtLrrid = #{xtlrrid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrrbm != null">
-        xtLrrbm = #{xtlrrbm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrrbmid != null">
-        xtLrrbmid = #{xtlrrbmid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtlrip != null">
-        xtLrip = #{xtlrip,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgsj != null">
-        xtZhxgsj = #{xtzhxgsj,jdbcType=TIMESTAMP},
-      </if>
-      <if test="xtzhxgrxm != null">
-        xtZhxgrxm = #{xtzhxgrxm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgrid != null">
-        xtZhxgrid = #{xtzhxgrid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgrbm != null">
-        xtZhxgrbm = #{xtzhxgrbm,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgrbmid != null">
-        xtZhxgrbmid = #{xtzhxgrbmid,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzhxgip != null">
-        xtZhxgip = #{xtzhxgip,jdbcType=VARCHAR},
-      </if>
-      <if test="xtzxbz != null">
-        xtZxbz = #{xtzxbz,jdbcType=BIT},
-      </if>
-      <if test="xtzxyy != null">
-        xtZxyy = #{xtzxyy,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dove.entity.User">
+    <insert id="insertSelective" parameterType="com.dove.entity.User">
+        insert into User
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                userName,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="xtlrsj != null">
+                xtLrsj,
+            </if>
+            <if test="xtlrrxm != null">
+                xtLrrxm,
+            </if>
+            <if test="xtlrrid != null">
+                xtLrrid,
+            </if>
+            <if test="xtlrrbm != null">
+                xtLrrbm,
+            </if>
+            <if test="xtlrrbmid != null">
+                xtLrrbmid,
+            </if>
+            <if test="xtlrip != null">
+                xtLrip,
+            </if>
+            <if test="xtzhxgsj != null">
+                xtZhxgsj,
+            </if>
+            <if test="xtzhxgrxm != null">
+                xtZhxgrxm,
+            </if>
+            <if test="xtzhxgrid != null">
+                xtZhxgrid,
+            </if>
+            <if test="xtzhxgrbm != null">
+                xtZhxgrbm,
+            </if>
+            <if test="xtzhxgrbmid != null">
+                xtZhxgrbmid,
+            </if>
+            <if test="xtzhxgip != null">
+                xtZhxgip,
+            </if>
+            <if test="xtzxbz != null">
+                xtZxbz,
+            </if>
+            <if test="xtzxyy != null">
+                xtZxyy,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrsj != null">
+                #{xtlrsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="xtlrrxm != null">
+                #{xtlrrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrrid != null">
+                #{xtlrrid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrrbm != null">
+                #{xtlrrbm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrrbmid != null">
+                #{xtlrrbmid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrip != null">
+                #{xtlrip,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgsj != null">
+                #{xtzhxgsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="xtzhxgrxm != null">
+                #{xtzhxgrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgrid != null">
+                #{xtzhxgrid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgrbm != null">
+                #{xtzhxgrbm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgrbmid != null">
+                #{xtzhxgrbmid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgip != null">
+                #{xtzhxgip,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzxbz != null">
+                #{xtzxbz,jdbcType=BIT},
+            </if>
+            <if test="xtzxyy != null">
+                #{xtzxyy,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dove.entity.User">
+        update User
+        <set>
+            <if test="username != null">
+                userName = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrsj != null">
+                xtLrsj = #{xtlrsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="xtlrrxm != null">
+                xtLrrxm = #{xtlrrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrrid != null">
+                xtLrrid = #{xtlrrid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrrbm != null">
+                xtLrrbm = #{xtlrrbm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrrbmid != null">
+                xtLrrbmid = #{xtlrrbmid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtlrip != null">
+                xtLrip = #{xtlrip,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgsj != null">
+                xtZhxgsj = #{xtzhxgsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="xtzhxgrxm != null">
+                xtZhxgrxm = #{xtzhxgrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgrid != null">
+                xtZhxgrid = #{xtzhxgrid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgrbm != null">
+                xtZhxgrbm = #{xtzhxgrbm,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgrbmid != null">
+                xtZhxgrbmid = #{xtzhxgrbmid,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzhxgip != null">
+                xtZhxgip = #{xtzhxgip,jdbcType=VARCHAR},
+            </if>
+            <if test="xtzxbz != null">
+                xtZxbz = #{xtzxbz,jdbcType=BIT},
+            </if>
+            <if test="xtzxyy != null">
+                xtZxyy = #{xtzxyy,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dove.entity.User">
     update User
     set userName = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
@@ -227,4 +227,16 @@
       xtZxyy = #{xtzxyy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+    <select id="login" parameterType="com.dove.entity.User">
+    select * from User where userName = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      xtZxbz = #{xtzxbz,jdbcType=BIT}
+  </select>
+
+    <select id="login" parameterType="com.dove.entity.User">
+    update User
+    set xtZxbz = #{xtzxbz,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

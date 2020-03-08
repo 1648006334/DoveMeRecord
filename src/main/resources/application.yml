@@ -1,9 +1,21 @@
 spring:
+#  #配置mvc前后缀
+#  mvc:
+#    view:
+#      prefix: classpath:/static/html
+#      suffix: .html
+#  thymeleaf:
+#    prefix: classpath:/templates/html/
+#    suffix: .html
+  #spring security配置
   security:
     basic:
       enabled: false
+  managment:
+    security:
+      enabled: false
   application:
-    name: springboot-test-exam1
+    name: DoveMeRecord
   datasource:
     # 使用阿里的Druid连接池
     type: com.alibaba.druid.pool.DruidDataSource

@@ -1,0 +1,160 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/md5.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>登 录</title>
+    <style>
+        #box1 {
+            float: left;
+        }
+        
+        #box3 {
+            position: absolute;
+            left: 10%;
+            top: 20%;
+        }
+        
+        body {
+            background: url("../img/timg.gif");
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body style="width: 100%">
+    <div id="box3">
+        <form class="bs-example bs-example-form" role="form" style="float: right">
+            <div class="input-group col-md-3">
+                <span class="input-group-addon">账号: </span>
+                <input type="text" class="form-control" placeholder="请输入账号" id="name">
+            </div>
+            <br>
+            <div class="input-group col-md-3">
+                <span class="input-group-addon">密码: </span>
+                <input type="password" class="form-control" placeholder="请输入密码" id="password">
+            </div>
+            <br>
+            <div class="input-group col-md-2" id="box1">
+                <span class="input-group-addon">验证码：</span>
+                <input type="tel" class="form-control" placeholder="请输入验证码" id="tel">
+
+            </div>
+            <div class="input-group col-md-3" id="box2">
+                <span><canvas id="canvas" width="120" height="35"></canvas>
+                <a href="#" id="changeImg" style="color: white">看不清，换一张</a></span>
+            </div>
+            <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-success" id="btn1">登 录</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-primary" id="btn2">注 册</button>
+        </form>
+    </div>
+</body>
+<script>
+    /**用来接收生成的验证码**/
+    var tel = "";
+
+    /**生成一个随机数**/
+    function randomNum(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    /**生成一个随机色**/
+    function randomColor(min, max) {
+        var r = randomNum(min, max);
+        var g = randomNum(min, max);
+        var b = randomNum(min, max);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+    drawPic();
+    document.getElementById("changeImg").onclick = function(e) {
+        e.preventDefault();
+        tel = "";
+        drawPic();
+    }
+
+
+
+    /**绘制验证码图片**/
+    function drawPic() {
+        var canvas = document.getElementById("canvas");
+        var width = canvas.width;
+        var height = canvas.height;
+        var ctx = canvas.getContext('2d');
+        ctx.textBaseline = 'bottom';
+
+        /**绘制背景色**/
+        ctx.fillStyle = randomColor(180, 240); //颜色若太深可能导致看不清
+        ctx.fillRect(0, 0, width, height);
+        /**绘制文字**/
+        var str = 'ABCDEFGHIJKLMNOPQRSTUVWXY123456789';
+        for (var i = 0; i < 4; i++) {
+            var txt = str[randomNum(0, str.length)];
+            tel += txt;
+            ctx.fillStyle = randomColor(50, 160); //随机生成字体颜色
+            ctx.font = randomNum(15, 30) + 'px SimHei'; //随机生成字体大小
+            var x = 10 + i * 25;
+            var y = randomNum(25, 30);
+            var deg = randomNum(-35, 35);
+            //修改坐标原点和旋转角度
+            ctx.translate(x, y);
+            ctx.rotate(deg * Math.PI / 180);
+            ctx.fillText(txt, 0, 0);
+            //恢复坐标原点和旋转角度
+            ctx.rotate(-deg * Math.PI / 180);
+            ctx.translate(-x, -y);
+        }
+        // /**绘制干扰线**/
+        // for (var i = 0; i < 8; i++) {
+        //     ctx.strokeStyle = randomColor(40, 180);
+        //     ctx.beginPath();
+        //     ctx.moveTo(randomNum(0, width), randomNum(0, height));
+        //     ctx.lineTo(randomNum(0, width), randomNum(0, height));
+        //     ctx.stroke();
+        // }
+        /**绘制干扰点**/
+        for (var i = 0; i < 100; i++) {
+            ctx.fillStyle = randomColor(0, 255);
+            ctx.beginPath();
+            ctx.arc(randomNum(0, width), randomNum(0, height), 1, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+    }
+
+    $("#btn1").click(function() {
+        if ($("#tel").val().toUpperCase() != tel) {
+            alert("验证码输入错误！");
+            tel = "";
+            drawPic();
+        } else {
+            var name = $("#name").val();
+            var password = hex_md5($("#password").val());
+
+            $.ajax({
+                url: "/login/login",
+                type: "POST",
+                data: {
+                    name: name,
+                    password: password
+                },
+                success: function(data) {
+                    console.log(data)
+                },
+                error: alert("请求错误！")
+            })
+        }
+    })
+
+    $("#btn2").click(function() {
+        window.location.href = 'Register.html';
+    })
+</script>
+
+</html>
